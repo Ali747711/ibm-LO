@@ -16,6 +16,7 @@
             text-align: center;
             padding: 20px;
             position: relative;
+            overflow: hidden;
         }
         body::before {
             content: "";
@@ -31,9 +32,12 @@
         header {
             background: #222;
             color: #fff;
-            padding: 20px;
-            font-size: 24px;
+            padding: 10px;
+            font-size: 20px;
             font-weight: bold;
+            border-radius: 10px;
+            display: inline-block;
+            margin-top: 10px;
         }
         #student-info {
             font-size: 30px;
@@ -83,6 +87,16 @@
         button:hover {
             background: #007BFF;
         }
+        body::after {
+            content: "";
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 50%;
+            pointer-events: none;
+            transition: transform 0.1s ease;
+        }
     </style>
 </head>
 <body>
@@ -117,6 +131,10 @@
                 alert("Please select a file to upload.");
             }
         }
+        document.addEventListener("mousemove", function(event) {
+            let cursorEffect = document.body.querySelector("body::after");
+            cursorEffect.style.transform = `translate(${event.clientX}px, ${event.clientY}px)`;
+        });
     </script>
 </body>
 </html>
