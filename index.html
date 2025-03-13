@@ -12,25 +12,26 @@
             font-family: Arial, sans-serif;
         }
         body {
-            background: url('4788-180289892.mp4') no-repeat center center/cover;
             text-align: center;
             padding: 20px;
             position: relative;
             overflow: hidden;
+            background: black;
         }
-        body::before {
-            content: "";
-            position: absolute;
+        
+        /* Video Background */
+        #video-background {
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(255, 255, 255, 0.3);
-            backdrop-filter: blur(5px);
+            object-fit: cover;
             z-index: -1;
         }
+
         header {
-            background: #222;
+            background: rgba(34, 34, 34, 0.8);
             color: #fff;
             padding: 10px;
             font-size: 20px;
@@ -43,11 +44,16 @@
             font-size: 30px;
             font-weight: bold;
             margin-top: 20px;
+            background: rgba(0, 0, 0, 0.6);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            display: inline-block;
         }
         #student-id {
             font-size: 22px;
             margin-top: 5px;
-            color: #555;
+            color: #ddd;
         }
         #quote {
             margin-top: 20px;
@@ -58,12 +64,11 @@
             padding: 15px;
             border-radius: 8px;
             display: inline-block;
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
         }
         .upload-section {
             margin: 30px auto;
             padding: 20px;
-            background: white;
+            background: rgba(255, 255, 255, 0.9);
             border-radius: 8px;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
             max-width: 400px;
@@ -87,19 +92,15 @@
         button:hover {
             background: #007BFF;
         }
-        body::after {
-            content: "";
-            position: absolute;
-            width: 15px;
-            height: 15px;
-            background: rgba(255, 255, 255, 0.6);
-            border-radius: 50%;
-            pointer-events: none;
-            transition: transform 0.1s ease;
-        }
     </style>
 </head>
 <body>
+    <!-- Video Background -->
+    <video id="video-background" autoplay muted loop>
+        <source src="earth-animation.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
     <header>Welcome to My Student Portal</header>
 
     <div id="student-info">Nabiev Azamat</div>
@@ -131,10 +132,6 @@
                 alert("Please select a file to upload.");
             }
         }
-        document.addEventListener("mousemove", function(event) {
-            let cursorEffect = document.body.querySelector("body::after");
-            cursorEffect.style.transform = `translate(${event.clientX}px, ${event.clientY}px)`;
-        });
     </script>
 </body>
 </html>
