@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nabiev Azamat - Student Portal</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            background: url('https://source.unsplash.com/1600x900/?ocean,sky') no-repeat center center/cover;
+            text-align: center;
+            padding: 20px;
+        }
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(5px);
+            z-index: -1;
+        }
+        header {
+            background: #222;
+            color: #fff;
+            padding: 20px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        #student-info {
+            font-size: 30px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+        #student-id {
+            font-size: 22px;
+            margin-top: 5px;
+            color: #555;
+        }
+        #quote {
+            margin-top: 20px;
+            font-size: 18px;
+            font-style: italic;
+            background: #ddd;
+            padding: 10px;
+            border-radius: 8px;
+            display: inline-block;
+        }
+        .upload-section {
+            margin: 30px;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        .upload-section input {
+            display: block;
+            margin: 10px auto;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        button {
+            background: #222;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <header>Welcome to My Student Portal</header>
+
+    <div id="student-info">Nabiev Azamat</div>
+    <div id="student-id">Student ID: 2217423</div>
+
+    <div id="quote">
+        "Success is not final, failure is not fatal: it is the courage to continue that counts."
+    </div>
+
+    <div class="upload-section">
+        <h2>Upload Your Assignment</h2>
+        <input type="file" id="assignment-upload">
+        <button onclick="uploadFile('assignment-upload')">Upload</button>
+    </div>
+
+    <div class="upload-section">
+        <h2>Upload Your Picture</h2>
+        <input type="file" id="picture-upload">
+        <button onclick="uploadFile('picture-upload')">Upload</button>
+    </div>
+
+    <script>
+        function uploadFile(inputId) {
+            let fileInput = document.getElementById(inputId);
+            if (fileInput.files.length > 0) {
+                alert("File '" + fileInput.files[0].name + "' uploaded successfully!");
+                fileInput.value = ""; // Reset input after upload
+            } else {
+                alert("Please select a file to upload.");
+            }
+        }
+    </script>
+</body>
+</html>
