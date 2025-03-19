@@ -35,7 +35,6 @@ body {
   align-items: center;
   justify-content: center;
   padding: 20px;
-  position: relative; /* Allows absolute positioning inside */
 }
 
 /* Nodes (Draggable Elements) */
@@ -45,29 +44,12 @@ body {
   align-items: center;
   cursor: grab;
   margin: 10px 0;
-  width: 80px;
-  height: 80px;
 }
 
 /* ICON SIZE FIX - Makes icons uniform */
 .draggable img {
-  width: 60px;  
+  width: 60px;  /* Adjust this value as needed */
   height: 60px;
-  object-fit: contain;
-}
-
-/* Ensure dragged elements stay the correct size inside canvas */
-#canvas .draggable {
-  width: 80px;
-  height: 80px;
-  position: absolute;
-  cursor: move;
-}
-
-/* Ensure icons inside canvas also remain small */
-#canvas .draggable img {
-  width: 50px;
-  height: 50px;
   object-fit: contain;
 }
 
