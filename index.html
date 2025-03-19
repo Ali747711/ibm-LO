@@ -1,161 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nabiev Azamat - Student Portal</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, sans-serif;
-        }
-        body {
-            text-align: center;
-            padding: 20px;
-            position: relative;
-            overflow: hidden;
-            background: black;
-        }
-        
-        /* Video Background */
-        #video-background {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            object-fit: cover;
-            z-index: -1;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Logistics Flowchart Builder</title>
+  
+  <!-- Link to CSS for styling -->
+  <link rel="stylesheet" href="style.css">
 
-        header {
-            background: rgba(34, 34, 34, 0.8);
-            color: #fff;
-            padding: 10px;
-            font-size: 20px;
-            font-weight: bold;
-            border-radius: 10px;
-            display: inline-block;
-            margin-top: 10px;
-        }
-        #student-info {
-            font-size: 30px;
-            font-weight: bold;
-            margin-top: 20px;
-            background: rgba(0, 0, 0, 0.6);
-            color: white;
-            padding: 10px 15px;
-            border-radius: 5px;
-            display: inline-block;
-        }
-        #student-id {
-            font-size: 22px;
-            margin-top: 5px;
-            color: #ddd;
-        }
-        #quote {
-            margin-top: 20px;
-            font-size: 18px;
-            font-style: italic;
-            background: rgba(0, 0, 0, 0.6);
-            color: white;
-            padding: 15px;
-            border-radius: 8px;
-            display: inline-block;
-        }
-        .upload-section {
-            margin: 30px auto;
-            padding: 20px;
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 8px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-            max-width: 400px;
-        }
-        .upload-section input {
-            display: block;
-            margin: 10px auto;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-        }
-        button {
-            background: #222;
-            color: #fff;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background 0.3s ease;
-        }
-        button:hover {
-            background: #007BFF;
-        }
-        #uploaded-video {
-            margin-top: 20px;
-            max-width: 100%;
-            display: none;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-        }
-    </style>
+  <!-- Link to html2canvas (for PNG export) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+
+  <!-- Link to jsPDF (for PDF export) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 <body>
-    <!-- Video Background -->
-    <video id="video-background" autoplay muted loop>
-        <source src="earth-animation.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-    </video>
+  <header>
+    <h1>Logistics Flowchart Builder</h1>
+  </header>
 
-    <header>Welcome to My Student Portal</header>
-
-    <div id="student-info">Nabiev Azamat</div>
-    <div id="student-id">Student ID: 2217423</div>
-
-    <div id="quote">
-        "Success is not final, failure is not fatal: it is the courage to continue that counts."
+  <div id="container">
+    <!-- Sidebar for draggable nodes -->
+    <div id="sidebar">
+      <h2>Choose Nodes</h2>
+      <div id="node1" class="draggable" draggable="true">
+        <img src="assets/supplier.png" alt="Supplier" />
+        <p>Supplier</p>
+      </div>
+      <div id="node2" class="draggable" draggable="true">
+        <img src="assets/warehouse.png" alt="Warehouse" />
+        <p>Warehouse</p>
+      </div>
+      <div id="node3" class="draggable" draggable="true">
+        <img src="assets/transport.png" alt="Transport" />
+        <p>Transport</p>
+      </div>
+      <div id="node4" class="draggable" draggable="true">
+        <img src="assets/retail.png" alt="Retail" />
+        <p>Retail</p>
+      </div>
     </div>
 
-    <div class="upload-section">
-        <h2>Upload Your Assignment</h2>
-        <input type="file" id="assignment-upload">
-        <button onclick="uploadFile('assignment-upload')">Upload</button>
+    <!-- Canvas where flowchart will be built -->
+    <div id="canvas" ondrop="drop(event)" ondragover="allowDrop(event)">
+      <h2>Drag elements here to create your flowchart</h2>
     </div>
+  </div>
 
-    <div class="upload-section">
-        <h2>Upload Your Picture</h2>
-        <input type="file" id="picture-upload">
-        <button onclick="uploadFile('picture-upload')">Upload</button>
-    </div>
+  <footer>
+    <button id="exportBtn">Export as PNG</button>
+    <button id="exportPdfBtn">Export as PDF</button>
+  </footer>
 
-    <div class="upload-section">
-        <h2>Upload Your Video</h2>
-        <input type="file" id="video-upload" accept="video/*" onchange="displayVideo()">
-    </div>
-
-    <video id="uploaded-video" controls></video>
-
-    <script>
-        function uploadFile(inputId) {
-            let fileInput = document.getElementById(inputId);
-            if (fileInput.files.length > 0) {
-                alert("File '" + fileInput.files[0].name + "' uploaded successfully!");
-                fileInput.value = ""; // Reset input after upload
-            } else {
-                alert("Please select a file to upload.");
-            }
-        }
-
-        function displayVideo() {
-            let videoInput = document.getElementById('video-upload');
-            let videoElement = document.getElementById('uploaded-video');
-            if (videoInput.files.length > 0) {
-                let fileURL = URL.createObjectURL(videoInput.files[0]);
-                videoElement.src = fileURL;
-                videoElement.style.display = 'block';
-            }
-        }
-    </script>
+  <script src="script.js"></script>
 </body>
 </html>
