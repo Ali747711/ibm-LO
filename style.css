@@ -72,3 +72,21 @@ button {
 button:hover {
   background: #0056b3;
 }
+/* Ensure dragged elements remain the same size */
+#canvas .draggable {
+  width: 80px;  /* Adjust the size as needed */
+  height: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  cursor: move;
+}
+
+/* Ensure icons inside the canvas also remain small */
+#canvas .draggable img {
+  width: 50px;  /* Keep icons proportional */
+  height: 50px;
+  object-fit: contain;
+}
