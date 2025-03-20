@@ -16,7 +16,6 @@ function saveState() {
         nodes: nodes.map((node) => ({ ...node })),
         connections: connections.map((conn) => ({ ...conn })),
     };
-    // If the index is not at the end of the history, remove the extra history.
     if (historyIndex < history.length - 1) {
         history.splice(historyIndex + 1);
     }
@@ -52,6 +51,10 @@ function createNode(type, x, y) {
 
 // Draw function (draws nodes and connections)
 function draw() {
+    //Set Canvas size to the flowchart area size.
+    canvas.width = flowchartArea.offsetWidth;
+    canvas.height = flowchartArea.offsetHeight;
+
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     drawConnections();
     drawNodes();
