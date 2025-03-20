@@ -8,7 +8,7 @@ function drop(event) {
   event.preventDefault();
   const draggedElementId = event.dataTransfer.getData("text");
   const draggedElement = document.getElementById(draggedElementId);
-  
+
   // Create a new element to place inside the canvas
   const newElement = draggedElement.cloneNode(true);
   newElement.style.position = 'absolute';
@@ -54,5 +54,17 @@ document.getElementById('exportBtn').addEventListener('click', function() {
     link.download = 'flowchart.png';
     link.href = canvas.toDataURL();
     link.click();
+  });
+});
+
+// Export the flowchart as PDF
+document.getElementById('exportPdfBtn').addEventListener('click', function() {
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF();
+
+  html2canvas(document.getElementById('canvas')).then(function(canvas) {
+    const imgData = canvas.toDataURL('image/png');
+    doc.addImage(imgData, 'PNG', 10, 10, 180, 160);
+    doc.save('flowchart.pdf');
   });
 });
