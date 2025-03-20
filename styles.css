@@ -80,7 +80,7 @@ h2 {
 
 .flowchart-area {
     width: 70%;
-    background: white;
+    background-color: #e0f7fa; /* Light blue background */
     margin: 10px;
     border: 2px dashed #bdc3c7;
     display: flex;
