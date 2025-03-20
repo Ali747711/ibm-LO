@@ -11,24 +11,27 @@
         <h1>Logistics Flowchart Builder</h1>
         <p>Create and visualize logistics processes easily by dragging and connecting nodes.</p>
     </header>
-    <div class="container">
-        <div class="sidebar">
-            <h2>Nodes</h2>
-            <div class="node" draggable="true" data-type="supplier">Supplier <span class="icon">📦</span></div>
-            <div class="node" draggable="true" data-type="warehouse">Warehouse <span class="icon">🏢</span></div>
-            <div class="node" draggable="true" data-type="distribution">Distribution <span class="icon">🚛</span></div>
-            <div class="node" draggable="true" data-type="retail">Retail <span class="icon">🛒</span></div>
-            <div class="node" draggable="true" data-type="transport">Transport <span class="icon">🚚</span></div>
-            <div class="sidebar-buttons">
-                <button id="undo">Undo</button>
-                <button id="redo">Redo</button>
-                <button id="reset">Reset</button>
+    <main>
+        <div class="container">
+            <div class="sidebar">
+                <h2>Nodes</h2>
+                <div class="node" draggable="true" data-type="supplier" tabindex="0">Supplier <span class="icon">📦</span></div>
+                <div class="node" draggable="true" data-type="warehouse" tabindex="0">Warehouse <span class="icon">🏢-0</span></div>
+                <div class="node" draggable="true" data-type="distribution" tabindex="0">Distribution <span class="icon">🚛</span></div>
+                <div class="node" draggable="true" data-type="retail" tabindex="0">Retail <span class="icon">🛒</span></div>
+                <div class="node" draggable="true" data-type="transport" tabindex="0">Transport <span class="icon">🚚</span></div>
+                <div class="sidebar-buttons">
+                    <button id="undo" aria-label="Undo last action">Undo</button>
+                    <button id="redo" aria-label="Redo last undone action">Redo</button>
+                    <button id="reset" aria-label="Reset the flowchart">Reset</button>
+                </div>
+            </div>
+            <div class="flowchart-area" id="flowchart">
+                <p id="flowchartPlaceholder">Drag and drop nodes here</p>
+                <canvas id="flowchartCanvas"></canvas>
             </div>
         </div>
-        <div class="flowchart-area" id="flowchart">
-            <p>Drag and drop nodes here</p>
-        </div>
-    </div>
+    </main>
     <script src="script.js"></script>
 </body>
 </html>
