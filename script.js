@@ -43,7 +43,13 @@ function createNode(type, x, y) {
     };
     nodes.push(node);
     if (nodes.length > 1) {
-        connections.push({ from: nodes[nodes.length - 2], to: node });
+        // Add connection with line style
+        connections.push({
+            from: nodes[nodes.length - 2],
+            to: node,
+            color: getRandomColor(),
+            lineWidth: Math.random() * 3 + 1, // Random line width
+        });
     }
     saveState();
     draw();
@@ -51,7 +57,6 @@ function createNode(type, x, y) {
 
 // Draw function (draws nodes and connections)
 function draw() {
-    //Set Canvas size to the flowchart area size.
     canvas.width = flowchartArea.offsetWidth;
     canvas.height = flowchartArea.offsetHeight;
 
@@ -78,13 +83,13 @@ function drawConnections() {
         const from = conn.from;
         const to = conn.to;
         if (from && to) {
-            drawArrow(from.x + from.width / 2, from.y + from.height / 2, to.x + to.width / 2, to.y + to.height / 2);
+            drawArrow(from.x + from.width / 2, from.y + from.height / 2, to.x + to.width / 2, to.y + to.height / 2, conn.color, conn.lineWidth);
         }
     });
 }
 
 // Draw arrow function
-function drawArrow(fromX, fromY, toX, toY) {
+function drawArrow(fromX, fromY, toX, toY, color = "black", lineWidth = 2) {
     const headLength = 10;
     const dx = toX - fromX;
     const dy = toY - fromY;
@@ -95,9 +100,19 @@ function drawArrow(fromX, fromY, toX, toY) {
     ctx.lineTo(toX - headLength * Math.cos(angle - Math.PI / 6), toY - headLength * Math.sin(angle - Math.PI / 6));
     ctx.moveTo(toX, toY);
     ctx.lineTo(toX - headLength * Math.cos(angle + Math.PI / 6), toY - headLength * Math.sin(angle + Math.PI / 6));
-    ctx.strokeStyle = "black";
-    ctx.lineWidth = 2;
+    ctx.strokeStyle = color;
+    ctx.lineWidth = lineWidth;
     ctx.stroke();
+}
+
+// Get random color function
+function getRandomColor() {
+    const letters = "0123456789ABCDEF";
+    let color = "#";
+    for (let i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
 }
 
 // Add event listeners for drag and drop
