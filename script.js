@@ -38,9 +38,10 @@ function createNode(type, x, y) {
         type: type,
         x: x,
         y: y,
-        width: 20, // Set node width to 20px
-        height: 20, // Set node height to 20px
-        color: getRandomColor(), // Assign random background color
+        width: 60, // Increased node width
+        height: 30, // Increased node height
+        color: getRandomColor(),
+        borderRadius: 5, // Add border radius
     };
     nodes.push(node);
     if (nodes.length > 1) {
@@ -68,14 +69,30 @@ function draw() {
 // Draw nodes function
 function drawNodes() {
     nodes.forEach((node) => {
-        ctx.fillStyle = node.color; // Use node's color
-        ctx.fillRect(node.x, node.y, node.width, node.height);
-        ctx.fillStyle = "black"; // Set text color to black
+        ctx.fillStyle = node.color;
+        drawRoundedRect(ctx, node.x, node.y, node.width, node.height, node.borderRadius);
+        ctx.fillStyle = "black";
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
-        ctx.font = "8px Arial"; // Set font size
+        ctx.font = "12px Arial"; // Increased font size
         ctx.fillText(node.type, node.x + node.width / 2, node.y + node.height / 2);
     });
+}
+
+// Draw rounded rectangle function
+function drawRoundedRect(ctx, x, y, width, height, radius) {
+    ctx.beginPath();
+    ctx.moveTo(x + radius, y);
+    ctx.lineTo(x + width - radius, y);
+    ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
+    ctx.lineTo(x + width, y + height - radius);
+    ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+    ctx.lineTo(x + radius, y + height);
+    ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
+    ctx.lineTo(x, y + radius);
+    ctx.quadraticCurveTo(x, y, x + radius, y);
+    ctx.closePath();
+    ctx.fill();
 }
 
 // Draw connections function
@@ -129,7 +146,7 @@ flowchartArea.addEventListener("dragover", (event) => {
 
 flowchartArea.addEventListener("drop", (event) => {
     const type = event.dataTransfer.getData("text/plain");
-    createNode(type, event.offsetX - 10, event.offsetY - 10); // Adjust for the new size
+    createNode(type, event.offsetX - 30, event.offsetY - 15); // Adjust for the new size
     document.getElementById("flowchartPlaceholder").style.display = "none";
 });
 
