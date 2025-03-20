@@ -5,45 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Logistics Flowchart Builder</title>
     <link rel="stylesheet" href="styles.css">
-    <style>
-        body {
-            font-family: "Avenir", sans-serif;
-        }
-        .header {
-            text-align: center;
-            font-size: 1.5em;
-            font-weight: 500;
-            margin-bottom: 20px;
-        }
-        .container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: 100%;
-        }
-        .content-wrapper {
-            display: flex;
-            width: 100%;
-        }
-        .sidebar {
-            width: 20%;
-            padding: 10px;
-            background-color: #f4f4f4;
-        }
-        .main-content {
-            width: 80%;
-            padding: 10px;
-        }
-        .flowchart-area {
-            width: 100%;
-            height: 500px;
-            border: 2px dashed #ccc;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: #fff;
-        }
-    </style>
 </head>
 <body>
     <header class="header">
@@ -51,25 +12,21 @@
         <p>Create and visualize logistics processes easily by dragging and connecting nodes.</p>
     </header>
     <div class="container">
-        <div class="content-wrapper">
-            <div class="sidebar">
-                <h2>Nodes</h2>
-                <div class="node" draggable="true" data-type="supplier">Supplier <span class="icon">📦</span></div>
-                <div class="node" draggable="true" data-type="warehouse">Warehouse <span class="icon">🏢</span></div>
-                <div class="node" draggable="true" data-type="distribution">Distribution <span class="icon">🚛</span></div>
-                <div class="node" draggable="true" data-type="retail">Retail <span class="icon">🛒</span></div>
-                <div class="node" draggable="true" data-type="transport">Transport <span class="icon">🚚</span></div>
-                <div class="sidebar-buttons">
-                    <button id="undo">Undo</button>
-                    <button id="redo">Redo</button>
-                    <button id="reset">Reset</button>
-                </div>
+        <div class="sidebar">
+            <h2>Nodes</h2>
+            <div class="node" draggable="true" data-type="supplier">Supplier <span class="icon">📦</span></div>
+            <div class="node" draggable="true" data-type="warehouse">Warehouse <span class="icon">🏢</span></div>
+            <div class="node" draggable="true" data-type="distribution">Distribution <span class="icon">🚛</span></div>
+            <div class="node" draggable="true" data-type="retail">Retail <span class="icon">🛒</span></div>
+            <div class="node" draggable="true" data-type="transport">Transport <span class="icon">🚚</span></div>
+            <div class="sidebar-buttons">
+                <button id="undo">Undo</button>
+                <button id="redo">Redo</button>
+                <button id="reset">Reset</button>
             </div>
-            <div class="main-content">
-                <div class="flowchart-area" id="flowchart">
-                    <p>Drag and drop nodes here</p>
-                </div>
-            </div>
+        </div>
+        <div class="flowchart-area" id="flowchart">
+            <p>Drag and drop nodes here</p>
         </div>
     </div>
     <script src="script.js"></script>
