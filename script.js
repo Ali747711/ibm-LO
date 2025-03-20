@@ -38,17 +38,17 @@ function createNode(type, x, y) {
         type: type,
         x: x,
         y: y,
-        width: 80,
-        height: 80,
+        width: 20, // Set node width to 20px
+        height: 20, // Set node height to 20px
+        color: getRandomColor(), // Assign random background color
     };
     nodes.push(node);
     if (nodes.length > 1) {
-        // Add connection with line style
         connections.push({
             from: nodes[nodes.length - 2],
             to: node,
             color: getRandomColor(),
-            lineWidth: Math.random() * 3 + 1, // Random line width
+            lineWidth: Math.random() * 3 + 1,
         });
     }
     saveState();
@@ -68,11 +68,12 @@ function draw() {
 // Draw nodes function
 function drawNodes() {
     nodes.forEach((node) => {
-        ctx.fillStyle = "#3498db";
+        ctx.fillStyle = node.color; // Use node's color
         ctx.fillRect(node.x, node.y, node.width, node.height);
-        ctx.fillStyle = "white";
+        ctx.fillStyle = "black"; // Set text color to black
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
+        ctx.font = "8px Arial"; // Set font size
         ctx.fillText(node.type, node.x + node.width / 2, node.y + node.height / 2);
     });
 }
@@ -128,7 +129,7 @@ flowchartArea.addEventListener("dragover", (event) => {
 
 flowchartArea.addEventListener("drop", (event) => {
     const type = event.dataTransfer.getData("text/plain");
-    createNode(type, event.offsetX - 40, event.offsetY - 40);
+    createNode(type, event.offsetX - 10, event.offsetY - 10); // Adjust for the new size
     document.getElementById("flowchartPlaceholder").style.display = "none";
 });
 
@@ -190,7 +191,7 @@ document.getElementById("exportBtn").addEventListener("click", function () {
 
 document.getElementById("exportPdfBtn").addEventListener("click", function () {
     // ... export pdf code
-});
+    });
 
 // Save initial state
 saveState();
