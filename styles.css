@@ -15,11 +15,11 @@ body {
 .content-area {
     display: flex;
     width: 100%;
-    height: calc(100vh - 80px); /* Adjust height as needed */
+    height: calc(100vh - 80px);
 }
 
 .sidebar {
-    width: 30%;
+    width: 20%; /* Reduced sidebar width to 20% */
     background: #2c3e50;
     color: white;
     padding: 20px;
@@ -79,8 +79,8 @@ h2 {
 }
 
 .flowchart-area {
-    width: 70%;
-    background-color: #e0f7fa; /* Light blue background */
+    width: 80%; /* Increased flowchart area width to 80% */
+    background-color: #e0f7fa;
     margin: 10px;
     border: 2px dashed #bdc3c7;
     display: flex;
