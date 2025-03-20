@@ -7,6 +7,31 @@ let isDragging = false;
 let dragOffsetX = 0;
 let dragOffsetY = 0;
 let selectedNode = null;
+const history = [];
+let historyIndex = -1;
+
+// Function to save the current state
+function saveState() {
+    const state = {
+        nodes: nodes.map((node) => ({ ...node })),
+        connections: connections.map((conn) => ({ ...conn })),
+    };
+    // If the index is not at the end of the history, remove the extra history.
+    if (historyIndex < history.length - 1) {
+        history.splice(historyIndex + 1);
+    }
+    history.push(state);
+    historyIndex = history.length - 1;
+}
+
+// Function to restore a state
+function restoreState(state) {
+    nodes.length = 0;
+    connections.length = 0;
+    nodes.push(...state.nodes);
+    connections.push(...state.connections);
+    draw();
+}
 
 // Node creation function
 function createNode(type, x, y) {
@@ -19,9 +44,9 @@ function createNode(type, x, y) {
     };
     nodes.push(node);
     if (nodes.length > 1) {
-        // Connect the new node to the previous one
         connections.push({ from: nodes[nodes.length - 2], to: node });
     }
+    saveState();
     draw();
 }
 
@@ -106,6 +131,7 @@ canvas.addEventListener("mousemove", (event) => {
     if (isDragging && selectedNode) {
         selectedNode.x = event.offsetX - dragOffsetX;
         selectedNode.y = event.offsetY - dragOffsetY;
+        saveState();
         draw();
     }
 });
@@ -113,6 +139,30 @@ canvas.addEventListener("mousemove", (event) => {
 canvas.addEventListener("mouseup", () => {
     isDragging = false;
     selectedNode = null;
+});
+
+// Reset button functionality
+document.getElementById("reset").addEventListener("click", () => {
+    nodes.length = 0;
+    connections.length = 0;
+    saveState();
+    draw();
+});
+
+// Undo button functionality
+document.getElementById("undo").addEventListener("click", () => {
+    if (historyIndex > 0) {
+        historyIndex--;
+        restoreState(history[historyIndex]);
+    }
+});
+
+// Redo button functionality
+document.getElementById("redo").addEventListener("click", () => {
+    if (historyIndex < history.length - 1) {
+        historyIndex++;
+        restoreState(history[historyIndex]);
+    }
 });
 
 // Export functionality (if needed)
@@ -123,3 +173,6 @@ document.getElementById("exportBtn").addEventListener("click", function () {
 document.getElementById("exportPdfBtn").addEventListener("click", function () {
     // ... export pdf code
 });
+
+// Save initial state
+saveState();
