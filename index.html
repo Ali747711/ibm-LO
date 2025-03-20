@@ -4,7 +4,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Logistics Flowchart Builder</title>
+  
+  <!-- Link to CSS for styling -->
   <link rel="stylesheet" href="style.css">
+
+  <!-- Link to html2canvas (for PNG export) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+
+  <!-- Link to jsPDF (for PDF export) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 <body>
   <header>
@@ -14,20 +22,21 @@
   <div id="container">
     <!-- Sidebar for draggable nodes -->
     <div id="sidebar">
+      <h2>Choose Nodes</h2>
       <div id="node1" class="draggable" draggable="true">
-        <img src="assets/Supplier.png" alt="Supplier" />
+        <img src="assets/supplier.png" alt="Supplier" />
         <p>Supplier</p>
       </div>
       <div id="node2" class="draggable" draggable="true">
-        <img src="assets/Warehouse.png" alt="Warehouse" />
+        <img src="assets/warehouse.png" alt="Warehouse" />
         <p>Warehouse</p>
       </div>
       <div id="node3" class="draggable" draggable="true">
-        <img src="assets/Transport.png" alt="Transport" />
+        <img src="assets/transport.png" alt="Transport" />
         <p>Transport</p>
       </div>
       <div id="node4" class="draggable" draggable="true">
-        <img src="assets/Retail.png" alt="Retail" />
+        <img src="assets/retail.png" alt="Retail" />
         <p>Retail</p>
       </div>
     </div>
@@ -40,9 +49,9 @@
 
   <footer>
     <button id="exportBtn">Export as PNG</button>
+    <button id="exportPdfBtn">Export as PDF</button>
   </footer>
 
   <script src="script.js"></script>
-  <script src="html2canvas.min.js"></script>
 </body>
 </html>
