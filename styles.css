@@ -1,9 +1,22 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: "Avenir", sans-serif;
     display: flex;
     height: 100vh;
     margin: 0;
     background-color: #f4f4f9;
+}
+
+.header {
+    text-align: center;
+    font-size: 1.5em;
+    font-weight: 500;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.container {
+    display: flex;
+    width: 100%;
 }
 
 .sidebar {
@@ -75,41 +88,13 @@ h2 {
     align-items: center;
     justify-content: center;
     position: relative;
+    height: calc(100vh - 140px); /* Adjust height as needed */
 }
-body {
-            font-family: "Avenir", sans-serif;
-        }
-        .header {
-            text-align: center;
-            font-size: 1.5em;
-            font-weight: 500;
-            margin-bottom: 20px;
-        }
-        .container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: 100%;
-        }
-        .content-wrapper {
-            display: flex;
-            width: 100%;
-        }
-        .sidebar {
-            width: 20%;
-            padding: 10px;
-            background-color: #f4f4f4;
-        }
-        .main-content {
-            width: 80%;
-            padding: 10px;
-        }
-        .flowchart-area {
-            width: 100%;
-            height: 500px;
-            border: 2px dashed #ccc;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: #fff;
-        }
+
+#flowchartCanvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
