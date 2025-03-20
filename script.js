@@ -33,16 +33,17 @@ function restoreState(state) {
 }
 
 // Node creation function
-function createNode(type, x, y) {
+function createNode(type, x, y, icon) {
     const node = {
         type: type,
         x: x,
         y: y,
-        width: 100, // Increased node width
-        height: 50, // Increased node height
+        width: 150, // Increased node width
+        height: 70, // Increased node height
         color: getRandomColor(),
-        borderRadius: 8, // Increased border radius
+        borderRadius: 10, // Increased border radius
         label: type, // Add label property initialized with type
+        icon: icon, // Add icon property
     };
     nodes.push(node);
     if (nodes.length > 1) {
@@ -72,11 +73,11 @@ function drawNodes() {
     nodes.forEach((node) => {
         ctx.fillStyle = node.color;
         drawRoundedRect(ctx, node.x, node.y, node.width, node.height, node.borderRadius);
-        ctx.fillStyle = "black";
+        ctx.fillStyle = "white"; // Set text color to white
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
-        ctx.font = "14px Arial"; // Increased font size
-        ctx.fillText(node.label, node.x + node.width / 2, node.y + node.height / 2); // Use node.label
+        ctx.font = "medium 16px Avenir"; // Set font style
+        ctx.fillText(node.label, node.x + node.width / 2, node.y + node.height / 2);
     });
 }
 
@@ -137,7 +138,10 @@ function getRandomColor() {
 // Add event listeners for drag and drop
 document.querySelectorAll(".node").forEach((node) => {
     node.addEventListener("dragstart", (event) => {
-        event.dataTransfer.setData("text/plain", event.target.dataset.type);
+        event.dataTransfer.setData("text/plain", JSON.stringify({
+            type: event.target.dataset.type,
+            icon: event.target.querySelector(".icon").textContent,
+        }));
     });
 });
 
@@ -146,8 +150,8 @@ flowchartArea.addEventListener("dragover", (event) => {
 });
 
 flowchartArea.addEventListener("drop", (event) => {
-    const type = event.dataTransfer.getData("text/plain");
-    createNode(type, event.offsetX - 50, event.offsetY - 25); // Adjust for the new size
+    const data = JSON.parse(event.dataTransfer.getData("text/plain"));
+    createNode(data.type, event.offsetX - 75, event.offsetY - 35, data.icon); // Adjust for the new size
     document.getElementById("flowchartPlaceholder").style.display = "none";
 });
 
