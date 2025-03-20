@@ -7,13 +7,17 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <header>
+        <h1>Logistics Flowchart Builder</h1>
+        <p>Create and visualize logistics processes easily by dragging and connecting nodes.</p>
+    </header>
     <div class="sidebar">
         <h2>Nodes</h2>
-        <div class="node" draggable="true" data-type="supplier">Supplier</div>
-        <div class="node" draggable="true" data-type="warehouse">Warehouse</div>
-        <div class="node" draggable="true" data-type="distribution">Distribution</div>
-        <div class="node" draggable="true" data-type="retail">Retail</div>
-        <div class="node" draggable="true" data-type="transport">Transport</div>
+        <div class="node" draggable="true" data-type="supplier">Supplier <span class="icon">📦</span></div>
+        <div class="node" draggable="true" data-type="warehouse">Warehouse <span class="icon">🏢</span></div>
+        <div class="node" draggable="true" data-type="distribution">Distribution <span class="icon">🚛</span></div>
+        <div class="node" draggable="true" data-type="retail">Retail <span class="icon">🛒</span></div>
+        <div class="node" draggable="true" data-type="transport">Transport <span class="icon">🚚</span></div>
         <div class="sidebar-buttons">
             <button id="undo">Undo</button>
             <button id="redo">Redo</button>
