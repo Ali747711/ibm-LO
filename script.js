@@ -38,10 +38,11 @@ function createNode(type, x, y) {
         type: type,
         x: x,
         y: y,
-        width: 60, // Increased node width
-        height: 30, // Increased node height
+        width: 100, // Increased node width
+        height: 50, // Increased node height
         color: getRandomColor(),
-        borderRadius: 5, // Add border radius
+        borderRadius: 8, // Increased border radius
+        label: type, // Add label property initialized with type
     };
     nodes.push(node);
     if (nodes.length > 1) {
@@ -74,8 +75,8 @@ function drawNodes() {
         ctx.fillStyle = "black";
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
-        ctx.font = "12px Arial"; // Increased font size
-        ctx.fillText(node.type, node.x + node.width / 2, node.y + node.height / 2);
+        ctx.font = "14px Arial"; // Increased font size
+        ctx.fillText(node.label, node.x + node.width / 2, node.y + node.height / 2); // Use node.label
     });
 }
 
@@ -146,7 +147,7 @@ flowchartArea.addEventListener("dragover", (event) => {
 
 flowchartArea.addEventListener("drop", (event) => {
     const type = event.dataTransfer.getData("text/plain");
-    createNode(type, event.offsetX - 30, event.offsetY - 15); // Adjust for the new size
+    createNode(type, event.offsetX - 50, event.offsetY - 25); // Adjust for the new size
     document.getElementById("flowchartPlaceholder").style.display = "none";
 });
 
@@ -204,7 +205,7 @@ document.getElementById("redo").addEventListener("click", () => {
 // Export functionality (if needed)
 document.getElementById("exportBtn").addEventListener("click", function () {
     // ... export code
-});
+    });
 
 document.getElementById("exportPdfBtn").addEventListener("click", function () {
     // ... export pdf code
